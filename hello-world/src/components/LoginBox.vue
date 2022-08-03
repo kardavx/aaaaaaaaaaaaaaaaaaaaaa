@@ -1,19 +1,28 @@
 <template>
   <div id="mainbox">
-    Wybrane: {{ count }}
-
     <select id="select1" v-model="selected">
       <option disabled value="">wybierz jedno</option>
       <option>Opcja 1</option>
       <option>Opcja 2</option>
       <option>Opcja 3</option>
     </select>
+    <div id="tiles">
+      <div id="tile">
+        {{GetName}}
+      </div>
+      <div id="tile">
+        {{GetName}}
+      </div>
+      <div id="tile">
+        {{GetName}}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 
-// import { mapActions } from "vuex"
+ import { mapActions } from "vuex"
 
 export default {
   name: 'LoginBox',
@@ -22,13 +31,15 @@ export default {
       selected: "Opcja 1"
     }
   },
-  created() {
-    console.log(this.$store)
+  computed: {
+    GetName() {
+      return this.metoda("name")
+    }
   },
   methods: {
-    // ...mapActions ({
-    //   metoda: 'test/GetStringFromAPI'
-    // })
+     ...mapActions ({
+       metoda: 'test/GetStringFromAPI'
+     })
   }
 }
 

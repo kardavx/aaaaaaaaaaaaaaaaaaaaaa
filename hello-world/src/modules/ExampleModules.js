@@ -5,11 +5,14 @@ export default {
     state: {
         count: 0,
     },
-    action: {
-        GetStringFromAPI() {
-            axios.get(`https://swapi.dev/api/people/1/'`)
+    actions: {
+        GetStringFromAPI(_, second) {
+            axios.get(`https://swapi.dev/api/people/1`)
                 .then(function (response) {
-                    console.log(response.name)
+                    const obj = response.data
+                    if (obj[second]) {
+                        return obj[second]
+                    }
                 });
         }
     },
