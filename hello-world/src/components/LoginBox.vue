@@ -1,9 +1,9 @@
 <template>
   <div id="mainbox">
     <div id="tiles">
-      <div id="tile">{{ GetName }}</div>
-      <div id="tile">{{ GetName }}</div>
-      <div id="tile">{{ GetName }}</div>
+      <div id="tile">{{ GetName() }}</div>
+      <div id="tile">{{ GetName() }}</div>
+      <div id="tile">{{ GetName() }}</div>
     </div>
   </div>
 </template>
@@ -12,17 +12,10 @@
 
 /* eslint-disable no-unused-vars */
 
-
 import { mapActions, mapState } from "vuex"
 
 export default {
   name: 'LoginBox',
-
-  data() {
-    return {
-      selected: "Opcja 1",
-    }
-  },
 
   created() {
     this.metoda("name","names")
@@ -30,21 +23,8 @@ export default {
 
   computed: {
     ...mapState({
-      names: state => state.names
+      names: state => state.test.names
     }),
-    GetNames() {
-      return this.$store.state.test.names
-    },
-    GetName() {
-      const names = this.GetNames
-      console.log(names)
-      if (!names) {console.log("names empty"); return  "Ladowanie danych..."}
-      if (names < 1 && names[1] != "object Promise") {
-        return "Ladowanie danych..."
-      }
-      console.log(names)
-      return names[Math.floor(Math.random() * names.length)]
-    }
   },
 
   methods: {
@@ -54,6 +34,16 @@ export default {
      ...mapActions ({
        metoda: 'test/GetStringFromAPI'
      }),
+    GetName() {
+      console.log(this.names)
+
+      if (!this.names) {console.log("names empty"); return  "Ladowanie danych..."}
+      if (this.names < 1 && this.names[1] != "object Promise") {
+        return "Ladowanie danych..."
+      }
+      console.log(this.names)
+      return this.names[Math.floor(Math.random() * this.names.length)]
+    }
   }
 }
 
