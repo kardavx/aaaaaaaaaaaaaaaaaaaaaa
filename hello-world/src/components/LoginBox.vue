@@ -1,7 +1,7 @@
 <template>
   <div id="mainbox">
-    <div class="tiles" v-if="GetList">
-      <div class="tile" v-for="n in GetList" :key="n">
+    <div class="tiles">
+      <div class="tile" v-for="(n,i) in GetList" :key="i" :style="`background-color: ${{GetColor}}`">
           <span id="name">{{ n.name }}</span>
           <span id="age">{{ n.birth_year }}</span>
       </div>
@@ -18,7 +18,7 @@ export default {
 
   data() {
     return {
-      amountoftiles: 3
+      amountoftiles: 3,
     }
   },
 
@@ -28,63 +28,26 @@ export default {
 
   computed: {
     ...mapState({
-      people: state => state.test.names,
+      people: state => state.test.people,
     }),
     GetList() {
-      console.log(this.people)
-      if (!this.people) {console.log("names empty"); return []}
+      console.log("not null")
       let LocalList = []
-      console.log(this.people)
       for (let i = 0; i < this.amountoftiles; i++) {
         LocalList.push(this.people[Math.floor(Math.random() * this.people.length)])
       }
       console.log(LocalList)
       return LocalList
-    }
+    },
   },
 
   methods: {
-     ...mapActions ({
-       metoda: 'test/GetStringFromAPI'
-     }),
-    // GetName() {
-    //   console.log(this.names)
-    //
-    //   if (!this.names) {console.log("names empty"); return  "Ladowanie danych..."}
-    //   if (this.names < 1 && this.names[1] != "object Promise") {
-    //     return "Ladowanie danych..."
-    //   }
-    //   console.log(this.names)
-    //   return this.names[Math.floor(Math.random() * this.names.length)]
-    // },
-    // GetCorrectName(corr_id) {
-    //   const divs = document.querySelectorAll(".tile");
-    //   for (let i = 0; i < divs.length; i++) {
-    //     if (divs[i].id == corr_id) {
-    //       for (let x = 0; x < divs[i].children.length; x++) {
-    //
-    //         if (divs[i].children[x].id == "name") {
-    //
-    //           return console.log(divs[i].children[x].textContent)
-    //         }
-    //       }
-    //       // console.log(divs[i].name.textContent)
-    //       // return divs[i].name.textContent
-    //     }
-    //   }
-    // },
-    // GetAge(corr_id) {
-    //   console.log(this.birth_year)
-    //
-    //   if (!this.birth_year) {console.log("names empty"); return  "Ladowanie danych..."}
-    //   if (this.birth_year < 1 && this.birth_year[1] != "object Promise") {
-    //     return "Ladowanie danych..."
-    //   }
-    //   console.log(this.birth_year)
-    //   console.log(this.names.indexOf(document.getElementById('name').textContent))
-    //   this.GetCorrectName(corr_id)
-    //  // return this.birth_year[this.names.indexOf(document.getElementById('name').textContent)]
-    // }
+    ...mapActions ({
+      metoda: 'test/GetStringFromAPI'
+    }),
+    GetColor() {
+
+    }
   }
 }
 
@@ -122,6 +85,7 @@ export default {
 
 span {
   text-align: center;
+  font-size: 1vw;
 }
 
 #name {

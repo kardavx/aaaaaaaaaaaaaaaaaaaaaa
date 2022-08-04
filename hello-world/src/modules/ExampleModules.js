@@ -9,7 +9,7 @@ export default {
         people: [],
     },
     actions: {
-        GetStringFromAPI({ commit }) {
+        GetStringFromAPI({ commit, state }) {
             console.log("knock to api")
             axios.get('https://swapi.dev/api/people')
                 .then(function (response) {
