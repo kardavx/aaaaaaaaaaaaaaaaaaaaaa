@@ -1,12 +1,15 @@
 <template>
   <div id="mainbox">
-    <span class="maintext">Losowe postacie ze Star Wars</span>
+    <span class="maintext">LOSOWE POSTACIE ZE STAR WARS</span>
     <span class="misctext">api provided by: https://swapi.dev/</span>
     <div class="tiles">
       <div class="tile" v-for="(n,i) in GetList" :key="i">
-          <div id="appearance" :style="`background-color: ${GetColor(n.gender)}`"></div>
-          <span id="name" class="textintiles">{{ 'Imie: ' + n.name }}</span>
-          <span id="age" class="textintiles">{{ 'Data urodzenia: ' + n.birth_year }}</span>
+          <div id="appearance" :style="`background-color: ${GetColor(n.gender)}`">
+            <span id="name" class="textintiles">{{ 'Imie: ' + n.name }}</span>
+            <span id="age" class="textintiles">{{ 'Data urodzenia: ' + (n.birth_year == "unknown" ? "Nieznana" : n.birth_year) }}</span>
+            <span id="height" class="textintiles">{{ 'Wzrost: ' + n.height + 'cm'}}</span>
+            <span id="mass" class="textintiles">{{ 'Waga: ' + n.mass + 'kg'}}</span>
+          </div>
       </div>
     </div>
   </div>
@@ -83,13 +86,11 @@ export default {
   width: calc(100% / 3);
   display: inline-block;
   height: 100%;
-  text-align: center;
 }
 
 #appearance {
   width:100%;
   height: 100%;
-  text-align: center;
   background-color: yellow;
   /*border-radius: 60px 60px 60px 60px;*/
 }
@@ -134,15 +135,29 @@ export default {
 #name {
   position: absolute;
   text-align: center;
-  transform: translate(-50%, 0%);
-  top:50%;
+  transform: translate(-22%, -45%);
+  top:45%;
 }
 
 #age {
   position: absolute;
   text-align: center;
-  transform: translate(-55%, 0%);
-  top: 55%;
+  transform: translate(-22%, -50%);
+  top:50%;
+}
+
+#height {
+  position: absolute;
+  text-align: center;
+  transform: translate(-22%, -55%);
+  top:55%;
+}
+
+#mass {
+  position: absolute;
+  text-align: center;
+  transform: translate(-22%, -60%);
+  top:60%;
 }
 
 </style>
