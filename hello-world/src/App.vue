@@ -21,4 +21,9 @@ export default {
   position: center;
 }
 
+html,
+body {
+  background-color:rgb(51, 51, 51);
+}
+
 </style>

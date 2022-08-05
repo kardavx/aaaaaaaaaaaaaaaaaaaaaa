@@ -1,9 +1,12 @@
 <template>
   <div id="mainbox">
+    <span class="maintext">Losowe postacie ze Star Wars</span>
+    <span class="misctext">api provided by: https://swapi.dev/</span>
     <div class="tiles">
-      <div class="tile" v-for="(n,i) in GetList" :key="i" :style="`background-color: ${{GetColor}}`">
-          <span id="name">{{ n.name }}</span>
-          <span id="age">{{ n.birth_year }}</span>
+      <div class="tile" v-for="(n,i) in GetList" :key="i">
+          <div id="appearance" :style="`background-color: ${GetColor(n.gender)}`"></div>
+          <span id="name" class="textintiles">{{ 'Imie: ' + n.name }}</span>
+          <span id="age" class="textintiles">{{ 'Data urodzenia: ' + n.birth_year }}</span>
       </div>
     </div>
   </div>
@@ -39,15 +42,19 @@ export default {
       console.log(LocalList)
       return LocalList
     },
+    GetColor() {
+      return (gender) => {
+        if (gender == "female") return 'hotpink'
+        else if (gender == "male") return 'lightblue'
+        else return 'lightgray'
+      }
+    }
   },
 
   methods: {
     ...mapActions ({
       metoda: 'test/GetStringFromAPI'
     }),
-    GetColor() {
-
-    }
   }
 }
 
@@ -59,12 +66,11 @@ export default {
   width: 70vw;
   height: 35vw;
   position: absolute;
-  background-color: white;
-  box-shadow: 1px 1px 2px lightgray, 0 0 25px lightgray, 0 0 5px lightgray;
+  background-color: lightgray;
+  box-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 5px black;
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
-  border-radius: 10px 60px 15px 60px;
 }
 
 .tiles {
@@ -78,26 +84,65 @@ export default {
   display: inline-block;
   height: 100%;
   text-align: center;
-  background-color: white;
-  box-shadow: 1px 1px 2px lightgray, 0 0 25px lightgray, 0 0 5px lightgray;
-  border-radius: 60px 60px 60px 60px;
 }
 
-span {
+#appearance {
+  width:100%;
+  height: 100%;
   text-align: center;
+  background-color: yellow;
+  /*border-radius: 60px 60px 60px 60px;*/
+}
+
+.textintiles {
+  text-align: center;
+  color: white;
+  width:60%;
   font-size: 1vw;
+  text-shadow: 2px 2px 8px #000000;
+  font-family: Arial;
+  font-weight: bolder;
+}
+
+.maintext {
+  text-align: center;
+  color: yellow;
+  width: 70%;
+  font-size: 2vw;
+  position: absolute;
+  transform: translate(-50%, 20%);
+  top: -20%;
+  left: 50%;
+  text-shadow: 2px 2px 8px #000000;
+  font-family: Arial;
+  font-weight: bolder;
+}
+
+.misctext {
+  text-align: center;
+  color: white;
+  width: 40%;
+  font-size: 0.5vw;
+  position: absolute;
+  transform: translate(-50%, -125%);
+  top: 125%;
+  left: 50%;
+  font-family: Arial;
+  font-weight: bolder;
 }
 
 #name {
   position: absolute;
+  text-align: center;
   transform: translate(-50%, 0%);
   top:50%;
 }
 
 #age {
   position: absolute;
+  text-align: center;
   transform: translate(-55%, 0%);
-  top:55%;
+  top: 55%;
 }
 
 </style>
